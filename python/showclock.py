@@ -1,19 +1,16 @@
-
+# Prepare for use with:
+# sudo apt-get update
+# sudo apt-get install pip
+# sudo pip install python-scrollphathd
+# run this script with python showclock.py
+# or crontab @reboot python /home/pi/showclock.py 
 
 import time
 
 import scrollphathd
 from scrollphathd.fonts import font5x5
 
-print("""
-Scroll pHAT HD: Clock
-
-Displays hours and minutes in text,
-plus a seconds progress bar.
-
-Press Ctrl+C to exit!
-
-""")
+print("Scroll pHAT HD Clock")
 
 # Display a progress bar for seconds
 # Displays a dot if False
