@@ -1,26 +1,24 @@
+# Scroll pHAT Clock, sourced from pimoroni.co.uk
+
 # Prepare for use with:
-# sudo apt-get update
-# sudo apt-get install python-scrollphathd 
+#   sudo apt-get update
+#   sudo apt-get install python-scrollphathd 
+
 # run this script with python showclock.py
-# or crontab @reboot python /home/pi/showclock.py 
+# and/or crontab @reboot python /home/pi/showclock.py 
 
 import time
 
 import scrollphathd
 from scrollphathd.fonts import font5x5
 
-pipprint("Scroll pHAT HD Clock")
+print("Scroll pHAT HD Clock")
 
-# Display a progress bar for seconds
-# Displays a dot if False
+# Display a progress bar for seconds, a dot is False
 DISPLAY_BAR = False
 
-# Brightness of the seconds bar and text
+# Brightness of the seconds bar and numbers
 BRIGHTNESS = 0.4
-
-# Uncomment the below if your display is upside down
-#   (e.g. if you're using it in a Pimoroni Scroll Bot)
-#scrollphathd.rotate(degrees=180)
 
 while True:
     scrollphathd.clear()
@@ -30,14 +28,7 @@ while True:
     float_sec = (time.time() % 60) / 59.0
 
     # Multiply our range by 15 to spread the current
-    # number of seconds over 15 pixels.
-    #
-    # 60 is evenly divisible by 15, so that
-    # each fully lit pixel represents 4 seconds.
-    #
-    # For example this is 28 seconds:
-    # [x][x][x][x][x][x][x][ ][ ][ ][ ][ ][ ][ ][ ] 
-    #  ^ - 0 seconds                59 seconds - ^
+    # number of seconds over 15 pixels
     seconds_progress = float_sec * 15
 
     if DISPLAY_BAR:
@@ -57,7 +48,6 @@ while True:
             # If we reach or pass 0, there are no more pixels left to draw
             if seconds_progress <= 0:
                 break
-
     else:
         # Just display a simple dot
         scrollphathd.set_pixel(int(seconds_progress), 6, BRIGHTNESS)
@@ -71,19 +61,9 @@ while True:
         brightness=BRIGHTNESS # Use our global brightness value
     )
 
-    # int(time.time()) % 2 will tick between 0 and 1 every second.
-    # We can use this fact to clear the ":" and cause it to blink on/off  
-    # every other second, like a digital clock.
-    # To do this we clear a rectangle 8 pixels along, 0 down,
-    # that's 1 pixel wide and 5 pixels tall.
     if int(time.time()) % 2 == 0:
         scrollphathd.clear_rect(8, 0, 1, 5)
 
-    # Display our time and sleep a bit. Using 1 second in time.sleep
-    # is not recommended, since you might get quite far out of phase
-    # with the passing of real wall-time seconds and it'll look weird!
-    #
-    # 1/10th of a second is accurate enough for a simple clock though :D
     scrollphathd.show()
     time.sleep(0.3)
 
