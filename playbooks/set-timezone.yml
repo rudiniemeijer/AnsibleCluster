@@ -1,0 +1,13 @@
+---
+- hosts: nodes
+  tasks:
+  - name: set timezone to Europe/Amsterdam
+    timezone:
+      name: Europe/Amsterdam
+    become: yes
+    become_method: sudo
+    notify:
+    - update tzdata
+
+  - name: update tzdata
+    command: dpkg-reconfigure --frontend noninteractive tzdata
