@@ -1,0 +1,2 @@
+[all]
+192.168.2.169 hostname="controller{{cluster_number}}"

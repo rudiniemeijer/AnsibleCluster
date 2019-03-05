@@ -1,0 +1,14 @@
+---
+- import_tasks: file_system.yml
+  when: "'controller_nodes' in group_names"
+
+- import_tasks: boot_config.yml
+
+- import_tasks: packages.yml
+
+- import_tasks: ansible_user.yml
+
+- import_tasks: hostname.yml
+  when: "'controller_nodes' in group_names"
+
+- import_tasks: internationalization.yml

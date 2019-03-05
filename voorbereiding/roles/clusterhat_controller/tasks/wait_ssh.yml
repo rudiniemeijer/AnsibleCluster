@@ -1,0 +1,19 @@
+- name: "Waiting for poort 22 on p{{cluster_number}}{{item}} internal IP 172.19.180.{{item}}"
+  wait_for:
+    port: 22
+    host: "172.19.180.{{item}}"
+    search_regex: '(SSH.*)'
+    delay: 1
+    timeout: 200
+  tags:
+    - clusterhat
+  # async: 200
+  # poll: 3
+#   register: async_results
+
+# - name:  "Check for poort 22 on p{{cluster_number}}{{item}}"
+#   async_status:
+#     jid: "{{ async_results.ansible_job_id }}"
+#   register: async_poll_results
+#   until: async_poll_results.finished
+#   retries: 30

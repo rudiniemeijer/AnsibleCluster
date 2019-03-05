@@ -1,0 +1,31 @@
+---
+- name: Ensure the locale en_GB.UTF-8 is disabled
+  locale_gen:
+    name: en_GB.UTF-8
+    state: absent
+  notify:
+  - Generate Locale
+  - Set Locale
+  - restart pi
+
+- name: Ensure the locale en_US.UTF-8 exists
+  locale_gen:
+    name: en_US.UTF-8
+    state: present
+  notify:
+  - Generate Locale
+  - Set Locale
+  - restart pi
+
+- name: set timezone to Europe/Amsterdam
+  timezone:
+    name: Europe/Amsterdam
+  notify:
+  - update tzdata
+
+# set /etc/default/keyboard
+- name: set /etc/default/keyboard
+  template: 
+    src: keyboard.j2
+    dest: /etc/default/keyboard
+    mode: 0644

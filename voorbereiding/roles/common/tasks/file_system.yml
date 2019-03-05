@@ -1,0 +1,6 @@
+---
+# Expand File the System
+- name: Expand filesystem to fill disk
+  expand_filesystem:
+  notify:
+  - restart pi

@@ -1,0 +1,3 @@
+---
+  hostname: controller2
+  cluster_number: '2'

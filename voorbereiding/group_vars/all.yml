@@ -1,0 +1,5 @@
+---
+ansible_ssh_user: pi
+ansible_ssh_pass: clusterhat
+cluster_number: '3'
+# ansible_ssh_user: ansible

@@ -1,0 +1,6 @@
+
+# python -c 'import crypt; print(crypt.crypt("ansible_pi", "$1$mySalt$"))'
+- name: "Update pi password"
+  user:
+    name: pi
+    password: $1$mySalt$cHUnUhnFnO9PFlVuaabNR1

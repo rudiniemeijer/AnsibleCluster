@@ -1,0 +1,33 @@
+---
+- name: "Create an ansible user account"
+  user:
+    name: ansible
+    shell: /bin/bash
+    groups: 
+    - adm
+    - dialout
+    - cdrom
+    - sudo
+    - audio
+    - video
+    - plugdev
+    - games
+    - users
+    - input
+    - netdev
+    - gpio
+    - i2c
+    - spi
+
+- name: "Add authorized key for ansible"
+  authorized_key:
+    user: "ansible"
+    key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+  with_items:
+    - ansible
+
+- name: Add ansible no pwd file
+  copy:
+    content: 'ansible ALL=(ALL) NOPASSWD: ALL'
+    dest: /etc/sudoers.d/020_ansible_nopasswd
+    mode: 0440

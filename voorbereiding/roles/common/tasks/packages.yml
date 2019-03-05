@@ -1,0 +1,23 @@
+---
+# Update apt packages
+- name: Update apt packages
+  apt: 
+    update_cache: yes
+
+# Do not Upgrade apt packages
+# - name: Upgrade apt packages
+#   apt: 
+#     upgrade: dist
+
+- name: Install a list of packages
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - gcc
+    - make
+    - build-essential
+    - python-dev
+    - git
+    - scons
+    - swig

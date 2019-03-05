@@ -1,0 +1,6 @@
+venv/
+**.log
+*.retry
+.vscode/settings.json
+
+voorbereiding/*.log

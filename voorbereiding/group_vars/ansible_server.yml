@@ -1,0 +1,68 @@
+---
+ansible_ssh_user: pi
+# ansible_ssh_pass: raspberry
+ansible_ssh_pass: clusterhat
+training_users:
+  - name: evert
+    password: testtest#123
+    hat: p11
+  - name: aprium
+    password: WjL]zH
+    hat: p11
+  - name: babaco
+    password: "#7vwWD"
+    hat: p12
+  - name: curuba
+    password: "'n8(G'"
+    hat: p13
+  - name: doerian
+    password: wj?A7v
+    hat: p14
+  - name: feijoa
+    password: V/?[w3
+    hat: p21
+  - name: gandaria
+    password: JL*be?
+    hat: p22
+  - name: grosella
+    password: m9(~(!
+    hat: p23
+  - name: jambolan
+    password: A^m%8z
+    hat: p24
+  - name: knippa
+    password: "`@Wnbf"
+    hat: p31
+  - name: kwini
+    password: zsw5,>
+    hat: p32
+  - name: loquat
+    password: 5D#-:X
+    hat: p33
+  - name: mabolo
+    password: WA'$Ft
+    hat: p34
+  - name: noni
+    password: "%GhFwX"
+    hat: p41
+  - name: orinoco
+    password: P^Njv9
+    hat: p42
+  - name: pepino
+    password: rcep?q
+    hat: p43
+  - name: moerbei
+    password: W-=e:B
+    hat: p44
+  - name: switbonki
+    password: F9BVF+
+    hat: p51
+  - name: tamarillo
+    password: /8R(&C
+    hat: p52
+  - name: ugli
+    password: yE9z2C
+    hat: p53
+  - name: wampi
+    password: -fp{?t
+    hat: p54
