@@ -1,0 +1,8 @@
+--
+# Minimalistische playbook
+- hosts: p11
+
+  tasks:
+    - name: Controleer of de machine bereikbaar is
+      ping:
+
