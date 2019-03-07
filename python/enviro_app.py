@@ -16,7 +16,6 @@ hostname = 'p14'
 def measure():
   leds.on()
   sensor = request.args.get('sensor', default=None, type=str)
-  sensor_value = None
   if sensor == 'temperature':
     sensor_value = weather.temperature()
   elif sensor == 'pressure':
