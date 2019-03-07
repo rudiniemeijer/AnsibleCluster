@@ -2,15 +2,15 @@
 # sudo apt-get install python-envirophat # Python 2
 # sudo apt-get install python3-envirophat # Python 3
 # pip install flask
-# run this script with python enviro_app.py
+# run this script with sudo python enviro_app.py
 
 # import the Pimoroni Unicorn library
 from envirophat import weather, leds, light, motion, analog
-
-from flask import Flask, request
+import socket # Used to retrieve hostname
+from flask import Flask, request # Flask microservice
 
 app = Flask(__name__)
-hostname = 'p14'
+hostname = socket.gethostname()
 
 @app.route('/measure')
 def measure():
