@@ -2,7 +2,7 @@
 # sudo apt-get install python-envirophat # Python 2
 # sudo apt-get install python3-envirophat # Python 3
 # pip install flask
-# run this script with sudo python enviro_app.py
+# run this script with python enviro_app.py
 
 # import the Pimoroni Unicorn library
 from envirophat import weather, leds, light, motion, analog
