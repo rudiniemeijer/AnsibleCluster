@@ -2,6 +2,7 @@
 # sudo apt-get install python-envirophat # Python 2
 # sudo apt-get install python3-envirophat # Python 3
 # pip install flask
+
 # run this script with python enviro_app.py
 
 # import the Pimoroni Unicorn library
@@ -16,6 +17,7 @@ hostname = socket.gethostname()
 def measure():
   leds.on()
   sensor = request.args.get('sensor', default=None, type=str)
+  sensor_value = None
   if sensor == 'temperature':
     sensor_value = weather.temperature()
   elif sensor == 'pressure':
