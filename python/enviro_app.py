@@ -10,7 +10,7 @@ from envirophat import weather, leds, light, motion, analog
 import socket # Used to retrieve hostname
 from flask import Flask, request # Flask microservice
 
-app = Flask(__name__)
+app = Flask(__name__)str
 hostname = socket.gethostname()
 
 @app.route('/measure')
@@ -37,7 +37,7 @@ def measure():
   leds.off()
 
   if sensor_value is not None:
-    return str(sensor_value), 200
+    return sensor + ":" + str(sensor_value), 200
   else:
     return '''Use: %s/measure?sensor=<i>type</i><br>
 where <i>type</i> is one of the following:<br>
