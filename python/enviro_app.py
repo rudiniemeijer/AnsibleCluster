@@ -42,6 +42,6 @@ def measure():
     data_set = {'value':sensor_value}
     return str(data_set), 200
   else:
-    return "{'usage':'http://%s/measure?sensor==temperature|pressure|color|light|analog|compass|accelerometer'}" % hostname, 400
+    return "{'usage':'http://%s/measure?sensor=temperature|pressure|color|light|analog|compass|accelerometer'}" % hostname, 400
 
 app.run(debug=False, host=hostname, port=4000)
