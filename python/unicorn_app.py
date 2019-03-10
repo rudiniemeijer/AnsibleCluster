@@ -7,7 +7,7 @@
 import unicornhat as uh
 import time, socket # Used to retrieve hostname
 from flask import Flask, request # Flask microservice
-from random import choice, randint
+from random import random, randint
 
 # Specify that the pHAT is used (instead of a HAT)
 uh.set_layout(uh.PHAT)
@@ -75,9 +75,7 @@ def set():
 def any():
   x = randint(0, max_x - 1)
   y = randint(0, max_y - 1)
-  r = choice(0, 128, 255)
-  g = choice(0, 128, 255)
-  b = choice(0, 128, 255)
+  r, g, b = to_rgb(random())
   uh.set_pixel(x,y,r,g,b)
   uh.show()
   return "{'result':'Set a random pixel'}", 200
