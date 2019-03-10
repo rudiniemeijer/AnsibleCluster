@@ -19,6 +19,35 @@ uh.set_layout(uh.PHAT)
 app = Flask(__name__)
 hostname = socket.gethostname()
 
+def to_rgb(hue):
+  rgb = {r=0, g=0, b=0}
+  
+  if hue < (1 / 3):
+    rgb.r = 2 - hue * 6
+    rgb.g = hue * 6
+    rgb.b = 0
+  elif hue < (2 / 3):
+    rgb.r = 0
+    rgb.g = hue * 6
+    rgb.b = hue * 6 - 2
+  else
+    rgb.r = hue * 6 - 4
+    rgb.g = 0
+    rgb.b = (1 - hue) * 6
+  
+  if rgb.r > 1:
+    rgb.r = 1
+  if rgb.g > 1:
+    rgb.g = 1
+  if rgb.b > 1:
+    rgb.b = 1
+    
+  rgb.r = rgb.r * 255
+  rgb.g = rgb.g * 255
+  rgb.b = rgb.b * 255
+  
+  return rgb
+
 @app.route('/showpixel')
 def showpixel():
   x = request.args.get('x', default=None, type=int)
