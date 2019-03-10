@@ -5,7 +5,7 @@
 
 # run this script with python enviro_app.py
 
-# import the Pimoroni Unicorn library
+# import the Pimoroni enviroPHAT library
 from envirophat import weather, leds, light, motion, analog
 import socket # Used to retrieve hostname
 from flask import Flask, request # Flask microservice
