@@ -1,11 +1,10 @@
 ---
 - hosts: nodes
   tasks:
-  - name: set timezone to Europe/Amsterdam
+  - name: Set timezone to Europe/Amsterdam.
     timezone:
       name: Europe/Amsterdam
     become: yes
-    become_method: sudo
     notify:
     - update tzdata
 
