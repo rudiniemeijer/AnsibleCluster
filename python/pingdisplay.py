@@ -11,10 +11,10 @@ import unicornhat as uh
 import os
 import time
 
-# Specify that the pHAT is used, instead of a HAT
+# Specify that the pHAT is used
 uh.set_layout(uh.PHAT)
 
-# Set brightness to less dagenrout acceptable level
+# Set brightness to an acceptable level
 uh.brightness(0.5)
 
 def set_node_pixel(node_number, status):
