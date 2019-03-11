@@ -81,15 +81,15 @@ def log():
     uh.show()
     serial_display_pixel = 0
 
-  msg = request.args.get('msg', default='critical', type=str)
-  if msg == 'info':
+  msg = request.args.get('msg', default='info', type=str)
+  if msg == 'success':
     r , g, b = 0, 0, 255
+  elif msg == 'fail':
+    r, g, b = 255, 0, 0
   elif msg == 'warn':
-    r, g, b = 255, 255, 0
-  elif msg == 'error':
     r, g, b = 255, 165, 0
   else:
-    r, g, b = 255, 0, 0
+    r, g, b = 0, 0, 255
 
   x = serial_display_pixel % 8
   y = int(serial_display_pixel / 8)
