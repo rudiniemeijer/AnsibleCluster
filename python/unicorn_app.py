@@ -83,7 +83,7 @@ def log():
 
   msg = request.args.get('msg', default='info', type=str)
   if msg == 'success':
-    r , g, b = 0, 0, 255
+    r , g, b = 0, 255, 0
   elif msg == 'fail':
     r, g, b = 255, 0, 0
   elif msg == 'warn':
