@@ -72,16 +72,16 @@ def set():
   else:
     return invalid_msg, 400
 
-@app.route('/log')
+@app.route('/status')
 def log():
   global serial_display_pixel
   serial_display_pixel += 1
-  if serial_display_pixel > (width * height):
+  if serial_display_pixel >= (width * height):
     uh.clear()
     uh.show()
     serial_display_pixel = 0
 
-  msg = request.args.get('msg', default='info', type=str)
+  msg = request.args.get('msg', default='critical', type=str)
   if msg == 'info':
     r , g, b = 0, 0, 255
   elif msg == 'warn':
@@ -90,11 +90,14 @@ def log():
     r, g, b = 255, 165, 0
   else:
     r, g, b = 255, 0, 0
+
   x = serial_display_pixel % 8
   y = int(serial_display_pixel / 8)
+
   uh.set_pixel(x,y,r,g,b)
-  uh.show
-  return "{'result':'Set a pixel at (%s,%s)'}" % (x,y), 200
+  uh.show()
+
+  return "{'result':'Set status as a pixel at (%s,%s)'}" % (x,y), 200
 
 @app.route('/any')
 def any():
