@@ -12,7 +12,8 @@ from random import random, randint
 # Specify that the pHAT is used (instead of a HAT)
 uh.set_layout(uh.PHAT)
 
-max_x, max_y = uh.get_shape()
+width, height = uh.get_shape()
+serial_display_pixel = -1
 
 app = Flask(__name__)
 hostname = socket.gethostname()
@@ -47,7 +48,7 @@ def to_rgb(hue):
 
 # Determine if the pixel is in an acceptable range
 def valid_pixel(x, y, hue):
-  if x < 0 or x >= max_x or y < 0 or y >= max_y or hue < 0 or hue > 1:
+  if x < 0 or x >= width or y < 0 or y >= height or hue < 0 or hue > 1:
     return False
   else:
     return True 
@@ -71,10 +72,34 @@ def set():
   else:
     return invalid_msg, 400
 
+@app.route('/log')
+def log():
+  global serial_display_pixel
+  serial_display_pixel += 1
+  if serial_display_pixel > (width * height):
+    uh.clear()
+    uh.show()
+    serial_display_pixel = 0
+
+  msg = request.args.get('msg', default='info', type=str)
+  if msg == 'info':
+    r , g, b = 0, 0, 255
+  elif msg == 'warn':
+    r, g, b = 255, 255, 0
+  elif msg == 'error':
+    r, g, b = 255, 165, 0
+  else:
+    r, g, b = 255, 0, 0
+  x = serial_display_pixel % 8
+  y = int(serial_display_pixel / 8)
+  uh.set_pixel(x,y,r,g,b)
+  uh.show
+  return "{'result':'Set a pixel at (%s,%s)'}" % (x,y), 200
+
 @app.route('/any')
 def any():
-  x = randint(0, max_x - 1)
-  y = randint(0, max_y - 1)
+  x = randint(0, width - 1)
+  y = randint(0, height - 1)
   r, g, b = to_rgb(random())
   uh.set_pixel(x,y,r,g,b)
   uh.show()
