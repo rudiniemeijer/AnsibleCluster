@@ -56,11 +56,12 @@ def valid_pixel(x, y, hue):
 
 @app.route('/set')
 def set():
+  global width, height
   x = request.args.get('x', default=None, type=int)
   y = request.args.get('y', default=None, type=int)
   hue = request.args.get('hue', default=None, type=float)
 
-  invalid_msg = "{'usage':'http://%s/set?x=[0..%s]&y=[0..%s]&hue=[0..1]'}" % (hostname, max_x - 1, max_y - 1)
+  invalid_msg = "{'usage':'http://%s/set?x=[0..%s]&y=[0..%s]&hue=[0..1]'}" % (hostname, width - 1, height - 1)
 
   if (x is not None) and (y is not None) and (hue is not None):
     if valid_pixel(x,y,hue):
