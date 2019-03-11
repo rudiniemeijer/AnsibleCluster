@@ -111,6 +111,7 @@ def any():
 
 @app.route('/clear')
 def clear():
+  global serial_display_pixel
   uh.clear()
   uh.show()
   serial_display_pixel = -1
