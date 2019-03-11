@@ -48,6 +48,7 @@ def to_rgb(hue):
 
 # Determine if the pixel is in an acceptable range
 def valid_pixel(x, y, hue):
+  global width, height
   if x < 0 or x >= width or y < 0 or y >= height or hue < 0 or hue > 1:
     return False
   else:
