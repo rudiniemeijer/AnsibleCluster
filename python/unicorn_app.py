@@ -99,6 +99,7 @@ def log():
 
   return "{'result':'Set status as a pixel at (%s,%s)'}" % (x,y), 200
 
+
 @app.route('/any')
 def any():
   x = randint(0, width - 1)
@@ -112,6 +113,7 @@ def any():
 def clear():
   uh.clear()
   uh.show()
+  serial_display_pixel = -1
   return "{'result':'Cleared the display'}", 200
 
 app.run(debug=False, host=hostname, port=4000)
