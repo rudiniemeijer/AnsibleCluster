@@ -1,7 +1,6 @@
 ---
 ansible_ssh_user: pi
-# ansible_ssh_pass: raspberry
-ansible_ssh_pass: clusterhat
+ansible_ssh_pass: todo
 training_users:
   - name: evert
     password: testtest#123

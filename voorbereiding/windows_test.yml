@@ -1,0 +1,53 @@
+---
+- hosts: windows
+  gather_facts: no
+
+  tasks:
+
+  - name: Debug pwd
+    debug:
+      var: ansible_password
+
+  - name: remove a file (check mode)
+    win_file:
+      path: C:\temp
+      state: absent
+    register: remove_file_check
+    check_mode: yes
+
+  - name: get result of remove a file (check mode)
+    win_command: powershell.exe "if (Test-Path -Path 'C:\temp') { 'true' } else { 'false' }"
+    register: remove_file_actual_check
+
+  - name: assert remove a file (check mode)
+    assert:
+      that:
+      - remove_file_check is changed
+      - remove_file_actual_check.stdout == 'true\r\n'
+
+  - name: remove a file
+    win_file:
+      path: C:\temp
+      state: absent
+    register: remove_file
+
+  - name: get result of remove a file
+    win_command: powershell.exe "if (Test-Path -Path 'C:\temp') { 'true' } else { 'false' }"
+    register: remove_file_actual
+
+  - name: assert remove a file
+    assert:
+      that:
+      - remove_file is changed
+      - remove_file_actual.stdout == 'false\r\n'
+
+  - name: remove a file (idempotent)
+    win_file:
+      path: C:\temp
+      state: absent
+    register: remove_file_again
+
+  - name: assert remove a file (idempotent)
+    assert:
+      that:
+      - not remove_file_again is changed
