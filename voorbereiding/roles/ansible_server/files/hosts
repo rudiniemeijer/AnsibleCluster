@@ -1,0 +1,19 @@
+ # Dit is het Aan de slag met Ansible training hosts bestand
+# De locatie van dit bestand is ~/hosts (iedere gebruiker heeft er eentje) 
+#
+# Gebruik ansible -i ~/hosts om dit bestand als leidend te beschouwen
+# Of plaats inventory = ~/hosts in de ansible.cfg
+# Zie /etc/ansible/hosts voor informatie over het gebruik van dit bestand
+
+# Hardware bij het gebruik in de training
+[nodes]
+p[1:4][1:4].local ansible_user=pi ansible_password=clusterhat
+
+[unicorn]
+p24.local
+
+[big-ben]
+p44.local
+
+[sherlock]
+p14.local

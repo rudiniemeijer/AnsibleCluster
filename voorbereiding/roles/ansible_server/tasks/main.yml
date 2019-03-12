@@ -17,6 +17,10 @@
 # - name: Install passlib
 #   pip:
 #     name: passlib
+- include_tasks: remove_user.yml
+  loop: "{{training_users}}"
+  loop_control:
+    loop_var: training_user
 
 - include_tasks: create_user.yml
   loop: "{{training_users}}"
