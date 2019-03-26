@@ -4,6 +4,11 @@ ansible-controller.local
 [hat_controllers]
 controller[1:4].local
 
+[controller2_hats]
+p2[1:4].local
+
+[controller3_hats]
+p3[1:4].local
 
 [hats]
 p[1:4][1:4].local

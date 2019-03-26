@@ -1,0 +1,44 @@
+---
+- name: Ping all hats
+  hosts: all
+  vars:
+    url: http://p24.local:4000
+    my_host: p21.local
+    fail_hosts:
+    - p42.local
+    - p12.local
+
+  tasks:
+  - name: Perform the ping
+    ping:
+    register: result
+  
+  - name: Clear the hat
+    local_action:
+      module: uri
+      url: "{{ url }}/clear"
+    run_once: true
+
+  - set_fact:
+      led_status: fail
+    when: result is failed or inventory_hostname in fail_hosts
+
+  - set_fact:
+      led_status: info
+    when: inventory_hostname == my_host
+      
+  - set_fact:
+      led_status: success
+    when:
+    - result is succeeded
+    - not inventory_hostname == my_host
+    - not inventory_hostname in fail_hosts
+
+  - name: Led status
+    debug:
+      var: led_status
+
+  - name: Set the led
+    local_action:
+      module: uri
+      url: "{{ url }}/status?msg={{ led_status }}"

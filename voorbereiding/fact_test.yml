@@ -1,0 +1,35 @@
+---
+- name: Fact test script
+  hosts: controller2_hats
+  gather_facts: yes
+
+  tasks:
+
+  - name: get uptime
+    shell: /usr/bin/uptime | grep -ohe 'up .*' | sed 's/,//g' | awk '{ print $2" "$3 }'
+    changed_when: False
+    register: uptime
+
+  - debug:
+      var: uptime
+
+  - name: voeg fact toe
+    set_fact:
+      fact_a: "hallo"
+      fact_b: "hallo2"
+      fact_uptime: "{{ uptime.stdout }}"
+
+  - debug:
+      msg: "{{ uptime.stdout }}"
+
+  - debug:
+      msg: "{{ hostvars[inventory_hostname]['fact_uptime'] }}"
+
+  - debug:
+      var: hostvars[inventory_hostname]
+
+  - setup:
+    register: setup_outp
+
+  - debug:
+      var: setup_outp
