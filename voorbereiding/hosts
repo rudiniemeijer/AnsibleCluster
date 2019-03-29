@@ -1,8 +1,9 @@
 [ansible_server]
-ansible-controller.local
+#ansible-controller.local
+ansible-controller
 
 [hat_controllers]
-controller[1:4].local
+controller[1:5].local
 
 [controller2_hats]
 p2[1:4].local
