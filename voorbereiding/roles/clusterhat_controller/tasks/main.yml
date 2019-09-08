@@ -1,0 +1,87 @@
+# screen -rx rpiboot
+- name: Turn the clusterhat off
+  shell: clusterhat off
+  tags:
+    - clusterhat
+
+- name: "Clear the current boot.log p{{cluster_number}}[1-4]"
+  copy:
+    content: ''
+    force: yes
+    dest: "/var/lib/clusterhat/nfs/p{{item}}/var/log/boot.log"
+  loop:
+    - '1'
+    - '2'
+    - '3'
+    - '4'
+
+- name: "Copy cmdline p{{cluster_number}}[1-4]"
+  copy:
+    remote_src: true
+    src: "/usr/share/clusterhat/cmdline.p{{cluster_number}}{{item}}"
+    dest: "/var/lib/clusterhat/nfs/p{{item}}/boot/cmdline.txt"
+  loop:
+    - '1'
+    - '2'
+    - '3'
+    - '4'
+
+- name:  Update the cmdline.txt for net boot
+  replace:
+    path: "/var/lib/clusterhat/nfs/p{{item}}/boot/cmdline.txt"
+    regexp: '(\s+)root=/dev/mmcblk0p2 rootfstype=ext4(\s+.*)?$'
+    replace: '\1root=/dev/nfs nfsroot=172.19.180.254:/var/lib/clusterhat/nfs/p{{item}} rw ip=172.19.180.{{item}}:172.19.180.254::255.255.255.0:p{{cluster_number}}{{item}}:usb0:static\2'
+    backup: yes
+  loop:
+    - '1'
+    - '2'
+    - '3'
+    - '4'
+
+- name: "Update hostname p{{cluster_number}}[1-4]"
+  copy:
+    dest: "/var/lib/clusterhat/nfs/p{{item}}/etc/hostname"
+    content: "p{{cluster_number}}{{item}}\n"
+  loop:
+    - '1'
+    - '2'
+    - '3'
+    - '4'
+
+- name: Set the hostname in /etc/hosts too
+  template:
+    dest: "/var/lib/clusterhat/nfs/p{{item}}/etc/hosts"
+    src: hosts.j2
+  vars:
+    loopback_hostname: "p{{cluster_number}}{{item}}"
+  loop:
+    - '1'
+    - '2'
+    - '3'
+    - '4'
+
+- name: Edit MTU sizes
+  copy:
+    dest: "/var/lib/clusterhat/nfs/p{{item}}/etc/network/interfaces.d/clusterhat"
+    src: clusterhat
+  loop:
+    - '1'
+    - '2'
+    - '3'
+    - '4'
+  tags:
+    - mtu
+
+    # screen -rx rpiboot
+- name: Turn the clusterhat on
+  shell: clusterhat on
+  register: ps
+  tags:
+    - clusterhat
+
+- include_tasks: wait_ssh.yml
+  loop:
+    - '2'
+    - '4'
+    - '3'
+    - '1'

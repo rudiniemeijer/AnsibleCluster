@@ -1,0 +1,18 @@
+- include_tasks: remove_user.yml
+  loop: "{{training_users}}"
+  loop_control:
+    loop_var: training_user
+  tags:
+    - users
+
+- include_tasks: create_user.yml
+  loop: "{{training_users}}"
+  loop_control:
+    loop_var: training_user
+  tags:
+    - users
+
+- name: Install required software for the controller
+  include: software.yml
+  tags:
+    - software

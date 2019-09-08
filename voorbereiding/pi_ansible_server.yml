@@ -1,0 +1,8 @@
+---
+- hosts: ansible_server
+  gather_facts: no
+  become: true
+
+  tasks:
+  - import_role:
+      name: ansible_server

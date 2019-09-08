@@ -1,0 +1,32 @@
+---
+- hosts: localhost
+  vars:
+    - list: ["a","b"]
+    - list2: ["c","d"]
+    - myhash: {firstname: 'evert', lastname: 'mulder'}
+      
+      
+
+  tasks:
+  - name: hi
+    debug:
+      msg: "{{ item[0] }}{{ item[1] }}"
+    with_nested:
+    - "{{ list }}"
+    - "{{ list2 }}"
+
+  - name: hi2
+    debug:
+      var: myhash
+
+  - name: show dictionary
+    debug:
+      msg: "{{item.key}}: {{item.value}}"
+    with_dict: {a: 1, b: 2, c: 3}
+
+
+  - name: hi3
+    debug:
+      msg: "{{ item }}"
+    with_dict: {firstname: 'evert', lastname: 'mulder'}
+

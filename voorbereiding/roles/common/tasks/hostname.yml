@@ -1,0 +1,22 @@
+---
+- name: "Change hostname to {{hostname}}"
+  hostname:
+    name: "{{hostname}}"
+  when: hostname is defined
+  notify:
+  - restart pi
+
+# - name: Set the hostname in /etc/hosts too
+#   replace:
+#     path: /etc/hosts
+#     regexp: '(\s+)raspberrypi(\s+.*)?$'
+#     replace: "\\1{{hostname}}\\2"
+#     backup: yes
+#   when: hostname is defined
+
+- name: Set the hostname in /etc/hosts too
+  template:
+    dest: "/etc/hosts"
+    src: hosts.j2
+  vars:
+    loopback_hostname: "{{hostname}}"

@@ -1,0 +1,19 @@
+
+- name: "Encrypt password {{training_user.password}}"
+  encrypt_password:
+    pwd: "{{training_user.password}}"
+  register: enc_pwd
+
+- name: "Create user: {{training_user.name}}"
+  user:
+    name: "{{training_user.name}}"
+    shell: /bin/bash
+    password: "{{enc_pwd.result.enc_pwd}}"
+    groups:
+    - audio
+    - video
+    - plugdev
+    - games
+    - users
+    - input
+    - netdev

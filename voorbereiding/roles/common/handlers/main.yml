@@ -1,0 +1,20 @@
+# https://docs.ansible.com/ansible/latest/user_guide/playbooks_intro.html
+# Notify handlers are always run in the same order they are defined, 
+# not in the order listed in the notify-statement. 
+# This is also the case for handlers using listen.
+
+- name: update tzdata
+  command: dpkg-reconfigure --frontend noninteractive tzdata
+
+# Generate Locale
+- name: Generate Locale
+  command: locale-gen en_US.UTF-8
+
+# Set Locale
+- name: Set Locale
+  command: update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
+
+- name: restart pi
+  reboot:
+    reboot_timeout: 60
+  when: "'hats' not in group_names"

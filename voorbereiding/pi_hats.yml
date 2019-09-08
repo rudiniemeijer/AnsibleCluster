@@ -1,0 +1,22 @@
+---
+- hosts: controller_nodes
+  gather_facts: yes
+  become: true
+
+  tasks:
+  - import_role:
+      name: common
+
+  - import_role:
+      name: clusterhat_controller
+
+- hosts: hats
+  gather_facts: yes
+  become: true
+
+  tasks:
+  - import_role:
+      name: common
+
+  # - import_role:
+  #     name: clusterhat_controller

@@ -1,0 +1,28 @@
+[ansible_server]
+#ansible-controller.local
+ansible-controller
+
+[hat_controllers]
+controller[1:5].local
+
+[controller2_hats]
+p2[1:4].local
+
+[controller3_hats]
+p3[1:4].local
+
+[hats]
+p[1:4][1:4].local
+
+[windows]
+#WIN-CEVEOP38AM1 ansible_host=192.168.2.21
+#WIN-748J9LHC0IE ansible_host=localhost
+
+[windows:vars]
+ansible_user=test
+ansible_password=P@ssw0rd01##
+ansible_port=5986
+#ansible_winrm_message_encryption=auto
+ansible_connection=winrm
+#ansible_winrm_transport=ntlm
+ansible_winrm_server_cert_validation=ignore

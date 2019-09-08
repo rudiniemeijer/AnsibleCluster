@@ -1,0 +1,9 @@
+- name: "Remove user: {{training_user.name}}"
+  user:
+    name: "{{training_user.name}}"
+    state: absent
+
+- name: "Remove homedir /home/{{ training_user.name }}/"
+  file:
+    state: absent
+    path: "/home/{{ training_user.name }}/"

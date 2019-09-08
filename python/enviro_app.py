@@ -5,7 +5,8 @@
 
 # run this script with python enviro_app.py
 
-# import the Pimoroni enviroPHAT library
+
+from flask import jsonify
 from envirophat import weather, leds, light, motion, analog
 import socket # Used to retrieve hostname
 from flask import Flask, request # Flask microservice
@@ -40,7 +41,7 @@ def measure():
 
   if sensor_value is not None:
     data_set = {'value':sensor_value}
-    return str(data_set), 200
+    return jsonify(data_set), 200
   else:
     return "{'usage':'http://%s/measure?sensor=temperature|pressure|color|light|analog|compass|accelerometer'}" % hostname, 400
 

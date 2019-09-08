@@ -1,0 +1,39 @@
+- name: remove ansible from apt
+  apt:
+    autoremove: true
+    name: ansible
+    state: absent
+    purge: yes
+
+- name: Install python and python-pip and ansible dependencies
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - python
+    - python-pip
+    - libffi6
+    - libffi-dev
+    - vim
+
+- name: Install ansible 2.7.x
+  pip:
+    name: ansible>2.7.0,<2.8
+    umask: "0022"
+
+
+- name: Copy cunobow
+  copy:
+    src: cunobow.sh
+    dest: /home/pi/cunobow.sh
+    owner: pi
+    group: pi
+    mode: 0744
+
+- name: Copy rainbow
+  copy:
+    src: rainbow.sh
+    dest: /home/pi/rainbow.sh
+    owner: pi
+    group: pi
+    mode: 0744

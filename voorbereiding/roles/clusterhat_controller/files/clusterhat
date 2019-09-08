@@ -1,0 +1,5 @@
+auto usb0.10
+allow-hotplug usb0.10
+
+iface usb0.10 inet manual
+  mtu 1475

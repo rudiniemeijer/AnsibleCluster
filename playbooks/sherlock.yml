@@ -1,0 +1,17 @@
+---
+- name: Investigation
+  hosts: localhost
+
+  tasks:
+  - name: temp
+    uri:
+      url: http://p14.local:4000/measure?sensor=temperature
+      return_content: yes
+    register: res
+    connection: local
+
+  - name: Format the output
+    vars:
+      my_temp: "{{ res.content | from_json }}"
+    debug:
+      msg: "The temperature is: {{my_temp.value | round(1) }}"

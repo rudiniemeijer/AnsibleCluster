@@ -1,0 +1,3 @@
+---
+  hostname: "controller{{cluster_number}}"
+  cluster_number: '3'

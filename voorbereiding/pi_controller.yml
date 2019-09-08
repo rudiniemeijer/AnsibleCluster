@@ -1,0 +1,16 @@
+---
+- hosts: all
+  gather_facts: yes
+  become: true
+
+  vars_prompt:
+  - name: "cluster_number"
+    prompt: "What is the cluster_number?"
+    default: "1"
+
+  tasks:
+  - import_role:
+      name: common
+
+  # - import_role:
+  #     name: clusterhat_controller

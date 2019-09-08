@@ -2,6 +2,7 @@
 # De locatie van dit bestand is ~/hosts (iedere gebruiker heeft er eentje)
 #
 # Gebruik ansible -i ~/hosts om dit bestand als leidend te beschouwen
+# Of neem inventory = ~/hosts op de de ansible.cfg
 # Zie /etc/ansible/hosts voor informatie over het gebruik van dit bestand
 
 # Hardware bij het gebruik in de training

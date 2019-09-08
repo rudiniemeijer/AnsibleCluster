@@ -1,0 +1,24 @@
+---
+# Configure boot/config.txt values
+- name: Set gpu_mem in the boot/config.txt
+  boot_config:
+    name: gpu_mem
+    value: 16
+  notify:
+  - restart pi
+
+- name: Blacklist the audio device snd_bcm2835
+  copy:
+    content: 'blacklist snd_bcm2835'
+    dest: /etc/modprobe.d/snd-blacklist.conf
+    mode: 0644
+  notify:
+  - restart pi
+
+- name: Disable dtparam=audio=on in the boot/config.txt
+  boot_config:
+    name: dtparam
+    value: audio=on
+    state: absent
+  notify:
+  - restart pi
