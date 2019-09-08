@@ -2,7 +2,7 @@
 # Stelt de tijdzone van een node in
 - hosts: big-ben
   tasks:
-  - name: set timezone to Europe/Amsterdam
+  - name: Set timezone to Europe/Amsterdam.
     timezone:
       name: Europe/Amsterdam
     become: yes

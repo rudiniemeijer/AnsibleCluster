@@ -5,7 +5,7 @@
 
 # run this script with python enviro_app.py
 
-# import the Pimoroni Unicorn library
+
 from flask import jsonify
 from envirophat import weather, leds, light, motion, analog
 import socket # Used to retrieve hostname
@@ -45,4 +45,4 @@ def measure():
   else:
     return "{'usage':'http://%s/measure?sensor=temperature|pressure|color|light|analog|compass|accelerometer'}" % hostname, 400
 
-app.run(debug=False, host='0.0.0.0', port=4000)
+app.run(debug=False, host=hostname, port=4000)
