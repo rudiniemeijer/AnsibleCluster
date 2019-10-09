@@ -1,0 +1,25 @@
+---
+# Herhaal
+- hosts: localhost
+  gather_facts: no
+
+  tasks:
+  # - name: Test de verschillende kleuren.
+  #   uri: url=http://p24:4000/status?{{ item }}
+  #   loop:
+  #   - success
+  #   - fail
+  #   - warn
+  #   - info
+
+  # - name: Zet pixels met een kleur.
+  #   uri: url=http://p24:4000/set?x={{ item.x }}&y={{ item.y }}&hue={{ item.hue }}
+  #   loop:
+  #   - { x: 7, y: 3, hue: 0.5 }
+  #   - { x: 6, y: 2, hue: 0.3 }
+
+  - name: Vul het display met kleurige punten.
+    uri: url=http://p24:4000/any
+    until: 1 == -1
+    retries: 120
+    delay: 0.5

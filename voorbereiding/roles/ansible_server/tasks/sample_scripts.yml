@@ -1,0 +1,7 @@
+- name: Copy simple_loop playbook
+  copy:
+    src: simple_loop.yml
+    dest: "/home/{{training_user}}/simple_loop.yml"
+    owner: "{{training_user}}"
+    group: "{{training_user}}"
+    mode: 0744

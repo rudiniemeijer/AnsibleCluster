@@ -13,6 +13,15 @@
     - users
 
 - name: Install required software for the controller
-  include: software.yml
+  import_tasks: software.yml
   tags:
     - software
+
+- include_tasks: sample_scripts.yml
+  loop:
+  - evert
+  - pi
+  loop_control:
+    loop_var: training_user
+  tags:
+    - scripts

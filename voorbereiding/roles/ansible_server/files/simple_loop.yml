@@ -1,0 +1,12 @@
+---
+- tasks:
+    - name: Test de verschillende kleuren
+      uri: 
+        url: http://p24:4000/status?msg={{ item }}
+      loop:
+      - succes
+      - fai
+      - warn
+      - info
+  hosts: localhost
+  connection: local
