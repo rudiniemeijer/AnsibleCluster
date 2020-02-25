@@ -1,0 +1,13 @@
+---
+# Herhaal
+- hosts: all
+  gather_facts: no
+
+  tasks:
+  - name: Verwijder cunobow and rainbow
+    file:
+      path: "/home/pi/{{ item }}"
+      state: absent
+    loop:
+    - cunobow.sh
+    - rainbow.sh
